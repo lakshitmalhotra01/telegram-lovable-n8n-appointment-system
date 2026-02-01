@@ -1,0 +1,149 @@
+{
+  "name": "Telegram + Lovable Appointment System",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "76529392-e5d8-4426-86f3-6fb20b006396",
+      "name": "Telegram Trigger",
+      "webhookId": "153725ce-d62b-423d-9b53-d62dc00d8582",
+      "credentials": {
+        "telegramApi": {
+          "id": "DgZGJBO5WpoSWmWK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f55604b1-8085-412f-85b1-a4fa62e14678",
+              "leftValue": "={{$json.message.text}}",
+              "rightValue": "appointment",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "8708683c-01e5-4cdb-92a7-dfe48e5e69b4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "={{$json.message.chat.id}}",
+        "text": "=🧙‍♂️ Dr. Strange Appointment Desk    Great! Aap appointment book karna chahte ho ✨    Please batayein: 1️⃣ Aapka naam   2️⃣ Preferred date   3️⃣ Preferred time    (Example: Rahul, 10 Feb, 5 PM)",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        -96
+      ],
+      "id": "5f666b19-a4f7-48a0-9f40-d5f48bb302ae",
+      "name": "Send a text message1",
+      "webhookId": "607d9a33-8303-47b7-8331-9b94d6119941",
+      "credentials": {
+        "telegramApi": {
+          "id": "DgZGJBO5WpoSWmWK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{$json.message.chat.id}}",
+        "text": "=Hello 👋   Main Dr. Strange ka assistant hoon.    Appointment ke liye bas likhiye: 👉 book appointment",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        96
+      ],
+      "id": "cf67cbe8-f83a-41f6-8e2e-0d07504a3acd",
+      "name": "Send a text message2",
+      "webhookId": "31e6d98d-7b9b-45ce-b9d1-c4154e79cc5b",
+      "credentials": {
+        "telegramApi": {
+          "id": "DgZGJBO5WpoSWmWK",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "6412a19d-281b-480c-bf04-394ae2267d8f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "46a0a30200b2676b86788872a9d8797248b8931d322255a214bd7b0effbe1f98"
+  },
+  "id": "3aPSVB1W8Oal5LPUKs1G_",
+  "tags": []
+}
